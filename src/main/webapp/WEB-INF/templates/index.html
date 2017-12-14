@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Minecraft</title>
+        <link rel="stylesheet" type="text/css" href="css/ResponsiveStyle.css">
+        <link rel="stylesheet" type="text/css" href="css/articles.css">
+        <link rel="stylesheet" type="text/css" href="css/login.css">
+        <script type="text/javascript" src="js/main.js"></script>
+        <script type="text/javascript" src="js/login.js"></script>
+    </head>
+    <body  class="invisible-scrollbar">
+        <header th:replace="../fragments/htmlheader"></header>
+        <section id="content">
+            <section id="contenu" class="col-10">
+                <div th:insert="../fragments/articles/article_1">article 1</div>
+                <div th:insert="../fragments/articles/article_3">article 3</div>
+                <div th:insert="../fragments/articles/article_2">article 2</div>
+                <div th:insert="../fragments/articles/article_4">article 4</div>
+            </section>
+        </section>
+        <footer></footer>
+    </body>
+</html>

@@ -1,0 +1,2 @@
+SELECT * from version left JOIN sousversion ON  version.version_id = sousversion.version_id;
+select * from categorie left JOIN type ON categorie.categorie_id = type.categorie_id left JOIN item ON type.type_id = item.type_id;

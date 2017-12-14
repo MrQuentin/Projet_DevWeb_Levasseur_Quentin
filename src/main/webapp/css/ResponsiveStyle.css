@@ -1,0 +1,137 @@
+* {
+   box-sizing: border-box;
+}
+body{
+    width: 100%;
+    margin-left: 0px;
+    margin-top: 0px;
+    background-color: lightgray;
+}
+
+[id*="article-"] {
+    width: 100%;
+    height: auto;
+}
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+    /*border: 1px solid red;*/
+}
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+#menu a{
+    height: 50px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+header{
+    width: 100%;
+    background-image: url(../img/BGMenu.png);
+    position: fixed;
+}
+section #contenu{
+    margin-left: 8.33%;
+    margin-top: 110px;
+
+}
+#form{
+    background-image: url(../img/menu_gif/StaticGif.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+#form:hover{
+    background-image: url(../img/Menu.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+#guide{
+    background-image: url(../img/StaticGuideGif.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+#guide:hover{
+    background-image: url(../img/Guide.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+#blocks{
+    background-image: url(../img/StaticBlock.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+#blocks:hover{
+    background-image: url(../img/Block.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+#version{
+    background-image: url(../img/StaticItem.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+#version:hover{
+    background-image: url(../img/Item.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.bg-color{
+    background-color: #31ae1f;
+    border: 3px solid;
+    border-color: #64fd1f #47d009 #1e8c03 #156c00;
+    margin: 5px;
+    height: 60px;
+}
+.bg-color:hover{
+    background-color: #272727;
+    border: 3px solid;
+    border-color: #3d3d3d #2f2f2f #000000 #171717;
+}
+.tab{margin-left: 8.33%;}
+.tab2{margin-left: 16.66%;}
+.hide{display: none;}
+.no-margin{margin: 0px}
+.no-margin-top{margin-top: 0px}
+.no-padding{padding: 0px}
+.row-1{height: 50px}
+.reduced-padding{padding: 5px;}
+
+p{
+    margin-top: 0;
+}
+h2{margin-bottom: 0}
+.bgcolor{
+    background-color: #FFFFCF;
+    margin-top: -5px;
+    padding-top: 20px;
+}
+.invisible-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+#ConnectBar{
+  padding:0px;
+  margin: -20px -20px 0px 20px;
+  height: 24px;
+}
+#ConnectBar #login{
+  margin: 0 5px 0 0;
+  height: 24px;
+}
+figure img:not(#illustration){
+    max-height: 365px;
+}
+
+

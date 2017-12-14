@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Minecraft</title>
+		<link rel="stylesheet" type="text/css" href="css/ResponsiveStyle.css">
+		<link rel="stylesheet" type="text/css" href="css/form.css">
+		<link rel="stylesheet" type="text/css" href="css/login.css">
+		<script type="text/javascript" src="js/Deroulant.js"></script>
+		<script type="text/javascript" src="js/form.js"></script>
+		<script type="text/javascript" src="js/dropDownUpdate.js"></script>
+	</head>
+	<body id="myBody" class="invisible-scrollbar" onload="Action1()">
+    <header th:replace="../fragments/htmlheader"></header>
+		<section>
+            <!-- conteneur global -->
+			<section id="contenu" class="col-10">
+
+
+                <form>
+
+                    <div id="Action" > <!--Affiché si Utilisateur connecté comme admin-->
+                        <label for="Action">Que voulez vous faire : </label>
+                        <span class="radio">
+                            <input type="radio" name="Action" onchange="Action1()" value="Add" checked> Ajouter
+                            <input type="radio" name="Action" onchange="Action2()" value="Delete"> Suprimer
+                        </span>
+                    </div>
+
+                    <div id = "Ajout" style="display: none">
+                        <div id="Page"> <!--Affiché si Ajouter est choisi-->
+                            <label for="Page">Dans quelle page souhaitez vous Ajouter du contenu : </label>
+                            <span class="checkbox">
+                            <input  type="radio" name="Page" value="version" onchange="selectVersion();"> Versions
+                            <input  type="radio" name="Page" value="blocks" onchange="selectBlocks()"> Blocks
+                        </span>
+                        </div>
+
+                        <div id="AjoutVersion" style="display: none">
+                            <div id="Version"> <!--Affiché si Version est choisi-->
+                                <label for="TypeVersionSelector">Que souhaitez vous ajouter ? : </label>
+                                <select id="TypeVersionSelector" name="TypeVersinoSelector" onchange="isSousVersion()">
+                                    <option>...</option>
+                                    <option value="Version">Version</option>
+                                    <option value="SousVersion">Sous-Version</option>
+                                </select>
+                            </div>
+                            <div id="SousVersion" style="display: none"> <!--Affiché si Version est choisi-->
+                                <label for="TypeVersionForSVSelector">Que souhaitez vous ajouter ? : </label>
+                                <select id="TypeVersionForSVSelector" name="TypeVersionForSVSelector" onclick="isVersionFromSousVersionSelected()">
+                                    <option>...</option>
+                                    <th:block th:each="version : ${versions}">
+                                        <option th:value="'version'+${version.value.id}" th:text="${version.value.name}"></option>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div id="Versiontitre" style="display: none"><!--Affiché si un élément à été sélectioné dans Version ou Blocks-->
+                                <label for="title">Titre : </label>
+                                <input id="title" type="text" name="titre" placeholder="Votre titre...">
+                            </div>
+                            <div id="Versiontext" style="display: none"><!--Affiché si un élément à été sélectioné dans Version ou Blocks-->
+                                <label for="description">Qu'a ajouté cette version ?</label>
+                                <textarea id="description" name="description" placeholder="Description"></textarea>
+                            </div>
+                            <div id="Versionillustration" style="display: none"><!--Affiché si un élément à été sélectioné dans Version ou Blocks-->
+                                <!--<label for="illustration">Quelle image pour votre element ?:</label>
+                                <input type="file" name="illustration">-->
+                            </div>
+                        </div>
+
+                        <div id="AjoutBlock" style="display: none">
+
+                            <div id="SelectorAjoutBlock"> <!--Affiché si Blocks est choisi-->
+                                <label for="SelecttorAjoutB">Que souhaitez vous ajouter ? : </label>
+                                <select id="SelecttorAjoutB" onchange="displaySelectionAdd()">
+                                    <option>...</option>
+                                    <option value="Categorie">Categorie</option>
+                                    <option value="Type">Type</option>
+                                    <option value="Item">Item</option>
+                                </select>
+                            </div>
+
+                            <div id="Categorie" style="display: none"> <!--Affiché si Blocks est choisi-->
+                                <label for="CategorySelector">Dans quelle catégorie souhaitez vous ajouter ? : </label>
+                                <select id="CategorySelector" onchange="typeAddUpdater()">
+                                    <option>...</option>
+                                    <th:block th:each="categorie : ${categories}">
+                                        <option th:value="'categorie'+${categorie.value.id}" th:text="${categorie.value.name}"></option>
+                                    </th:block>
+                                </select>
+                            </div>
+
+                            <div id="Type" style="display: none"> <!--Affiché si Blocks est choisi-->
+                                <label for="TypeSelector">De quel type est votre item ? : </label>
+                                <select id="TypeSelector">
+                                    <option>...</option>
+                                    <th:block th:each="categorie:${categories}">
+                                        <th:block th:each="type:${categorie.value.typeMap}">
+                                            <option id="test" style="display: none" th:value="'categorie'+${categorie.value.id}+'-type'+${type.value.id}" th:text="${type.value.name}"></option>
+                                        </th:block>
+                                    </th:block>
+                                </select>
+                            </div>
+
+                            <div id="titre" style="display: none"><!--Affiché si un élément à été sélectioné dans Version ou Blocks-->
+                                <label for="titleb">Nom: </label>
+                                <input type="text" id="titleb" placeholder="Nom...">
+                            </div>
+
+                            <div id="text" style="display: none"><!--Affiché si un élément à été sélectioné dans Version ou Blocks-->
+                                <label for="descriptionb">Description de l'item à ajouter :</label>
+                                <textarea id="descriptionb" placeholder="Description ... "></textarea>
+                            </div>
+
+                            <div id="illustration" style="display: none"><!--Affiché si un élément à été sélectioné dans Version ou Blocks-->
+                                <!--<label for="illustration">Quelle image pour votre element ?:</label>
+                                <input type="file" name="illustration">-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id = "Suprimer" style="display: none">
+                        <div id="RmvPage"><!--Affiché si Suprimer est choisi-->
+                            <label for="RmvPage">Dans quelle page souhaitez vous Suprimer du contenu : </label>
+                            <input type="radio" name="RmvPage" value="version" onchange="selectSupprimerVersion()"> Versions
+                            <input type="radio" name="RmvPage" value="blocks" onchange="selectSupprimerCategorie()"> Blocks
+                        </div>
+
+                        <div id="DeleteVersion" style="display: none">
+                            <div id="RmvTypeVersion"><!--Affiché si Version est choisi dans delete-->
+                                <label for="TypeVersionSelectorRmv">Que souhaitez vous suprimer ? : </label>
+                                <select id="TypeVersionSelectorRmv">
+                                    <option selected>...</option>
+                                    <option value="Version">Version</option>
+                                    <option value="SousVersion">Sous-Version</option>
+                                </select>
+                            </div>
+                            <div id="RmvElementTypeVersion"><!--Affiché si Version est choisi dans RmvTypeVersion-->
+                                <label for="RmvElementTypeVersionSelector">Quel Version souhaitez vous suprimer ? : </label>
+                                <select id="RmvElementTypeVersionSelector" onchange="sousversionDeleteUpdater()">
+                                    <option>...</option>
+                                    <th:block th:each="version : ${versions}">
+                                        <option th:value="'version'+${version.value.id}" th:text="${version.value.name}"></option>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div id="RmvElementTypeSVersion"><!--Affiché si Version est choisi dans RmvTypeVersion-->
+                                <label for="RmvElementTypeSVersionSelector">Quel Sous-Version souhaitez vous suprimer ? : </label>
+                                <select id="RmvElementTypeSVersionSelector">
+                                    <option>...</option>
+                                    <th:block th:each="version : ${versions}">
+                                        <th:block th:each="sousversion:${version.value.sousVersions}">
+                                            <option th:value="'version'+${version.value.id}+'-sv'+${sousversion.id}" th:text="${sousversion.title}"></option>
+                                        </th:block>
+                                    </th:block>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="DeleteCategorie" style="display: none">
+
+                            <div id="SelectorDeleteBlock"> <!--Affiché si Blocks est choisi-->
+                                <label for="SelecttorDeleteB">Que souhaitez vous ajouter ? : </label>
+                                <select id="SelecttorDeleteB" onchange="displaySelectionDel()">
+                                    <option>...</option>
+                                    <option value="Categorie">Categorie</option>
+                                    <option value="Type">Type</option>
+                                    <option value="Item">Item</option>
+                                </select>
+                            </div>
+
+                            <div id="RmvCategorySelector" style="display: none"><!--Affiché si Blocks est choisi dans delete-->
+                                <label for="RmvCategorySelectorr">Dans quelle catégorie souhaitez vous suprimer un élément ? : </label>
+                                <select id="RmvCategorySelectorr" onchange="typeDeleteUpdater()">
+                                    <option>...</option>
+                                    <th:block th:each="categorie : ${categories}">
+                                        <option th:value="'categorie'+${categorie.value.id}" th:text="${categorie.value.name}"></option>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div id="RmvTypeSelector" style="display: none"><!--Affiché si Blocks est choisi dans delete-->
+                                <label for="RmvTypeSelectorr">Dans quelle catégorie souhaitez vous suprimer un élément ? : </label>
+                                <select id="RmvTypeSelectorr" onchange="itemDeleteUpdater()">
+                                    <option>...</option>
+                                    <th:block th:each="categorie:${categories}">
+                                        <th:block th:each="type:${categorie.value.typeMap}">
+                                            <option th:value="'categorie'+${categorie.value.id}+'-type'+${type.value.id}" th:text="${type.value.name}"></option>
+                                        </th:block>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div id="RmvElementSelector" style="display: none"><!--Affiché si un element est choisi dans RmvCategorySelector-->
+                                <label for="RmvElementSelectorr">Quel élement souhaitez vous suprimer ? : </label>
+                                <select id="RmvElementSelectorr">
+                                    <option>...</option>
+                                    <th:block th:each="categorie:${categories}">
+                                        <th:block th:each="type:${categorie.value.typeMap}">
+                                            <th:block th:each="item:${type.value.itemsList}">
+                                                <option th:value="'categorie'+${categorie.value.id}+'-type'+${type.value.id}+'-item'+${item.id}" th:text="${item.name}"></option>
+                                            </th:block>
+                                        </th:block>
+                                    </th:block>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a  onclick="detectFormDemand()"><p id="Submit">Valider</p></a>
+                    <!--<button id="Submit" onclick="detectFormDemand()">Valider</button>-->
+
+                </form>
+
+
+			</section>
+		</section>
+		<footer></footer>
+	</body>
+</html>

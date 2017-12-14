@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Minecraft</title>
+	<link rel="stylesheet" type="text/css" href="css/ResponsiveStyle.css">
+	<link rel="stylesheet" type="text/css" href="css/MenuDeroulant.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/login.js"></script>
+	<script type="text/javascript" src="js/Deroulant.js"></script>
+</head>
+<body id="myBody" class="invisible-scrollbar" onscroll="connectDisplay()">
+    <header th:replace="../fragments/htmlheader"></header>
+
+		<section>
+			<section id="contenu" class="col-10">
+				<section class="col-12 reduced-padding">
+					<th:block th:each="categorie:${categories}">
+
+						<section th:id="'categorie'+${categorie.value.id}" class="col-12 bg-color no-padding" onclick="toggle_button(this)">
+							<figure class="col-1 no-margin row-1"><img></figure>
+							<h2 th:text="${categorie.value.name}" class="col-11 no-margin row-1"></h2>
+						</section>
+						<section th:id="'categorie'+${categorie.value.id}+'-son'" class="col-11 tab reduced-padding" style="display: none">
+							<th:block th:each="type:${categorie.value.typeMap}">
+								<section class="col-12 reduced-padding">
+									<!-- bouton du type-->
+									<section th:id="'block'+${type.value.id}" class="col-12 bg-color no-padding no-margin" onclick="toggle_button(this)">
+										<figure class="col-1 no-margin row-1"><img></figure>
+										<h2 th:text="${type.value.name}" class="col-10 no-margin row-1">Armor</h2>
+									</section>
+									<section th:id="'block'+${type.value.id}+'-son'" class="col-11 tab reduced-padding" style="display: none;">
+										<th:block th:each="item:${type.value.itemsList}">
+											<section th:id="'item'+${item.id}" class="col-12 no-padding no-margin"> <!--style="margin-top: -35px;"-->
+												<figure class="col-2 no-padding no-margin"><img></figure>
+												<h2 th:text="${item.name}" class="col-10 no-padding no-margin" style="color: #2f2f2f">Armor</h2>
+												<p th:text="${item.description}" class="col-10 no-padding no-margin"></p>
+											</section>
+										</th:block>
+									</section>
+								</section>
+							</th:block>
+						</section>
+
+					</th:block>
+				</section>
+			</section>
+		</section>
+		<footer></footer>
+	</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Minecraft</title>
+        <link rel="stylesheet" type="text/css" href="css/ResponsiveStyle.css">
+        <link rel="stylesheet" type="text/css" href="css/MenuDeroulant.css">
+        <link rel="stylesheet" type="text/css" href="css/login.css">
+        <script type="text/javascript" src="js/main.js"></script>
+        <script type="text/javascript" src="js/login.js"></script>
+        <script type="text/javascript" src="js/Deroulant.js"></script>
+    </head>
+    <body    id="myBody" class="invisible-scrollbar">
+        <header th:replace="../fragments/htmlheader"></header>
+
+        <section>
+            <!-- conteneur global -->
+            <section id="contenu" class="col-10 reduced-padding">
+
+                <th:block th:each="version : ${versions}">
+                    <section class="col-12 reduced-padding">
+                        <section th:id="'version'+${version.value.id}" class="col-12 bg-color no-padding no-margin" onclick="toggle_button(this)">
+                            <figure class="col-1 no-margin row-1"><img th:id="'imageversion'+${version.value.id}" src="img/diamond_sword.png"></figure>
+                            <h2 class="col-11 no-margin row-1" th:text="${version.value.name}"></h2>
+                        </section>
+                        <section th:id="'version'+${version.value.id}+'-son'" class="col-11 tab reduced-padding" style="display: none">
+                            <th:block th:each="sousversion : ${version.value.sousVersions}">
+                                <section class="col-12 reduced-padding">
+                                    <section th:id="'v'+${sousversion.id}" class="col-12 bg-color no-padding no-margin" onclick="toggle_button(this)">
+                                        <figure class="col-1 no-margin row-1"><img src="img/diamond_sword.png"></figure>
+                                        <h2 class="col-10 no-margin row-1" th:text="${sousversion.title}">Version 1.12.2</h2>
+                                    </section>
+                                    <section th:id="'v'+${sousversion.id}+'-son'" class="col-11 reduced-padding tab" style="display: none">
+                                        <p th:text="${sousversion.description}" class="col-8">java edition logo</p>
+                                    </section>
+                                </section>
+                            </th:block>
+                        </section>
+                    </section>
+                </th:block>
+
+            </section>
+        </section>
+
+        <footer></footer>
+    </body>
+</html>
