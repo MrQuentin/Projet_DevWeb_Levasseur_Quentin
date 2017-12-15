@@ -18,6 +18,8 @@ public class VersionLibrary {
 
     public Version addVersion(Version version) {return versionDao.addVersion(version);}
     public SousVersion addSousVersion(SousVersion sousversion, Integer idVersion) {return versionDao.addSousVersion(sousversion, idVersion);}
+    public SousVersion getSousVersion(Integer idSousVersion) {return versionDao.getSousVersion(idSousVersion);}
+    public void updateSousVersion (Integer sousVersionId, String newName, String newDescription) {versionDao.updateSousVersion(sousVersionId, newName, newDescription);}
 
     public void removeSousVersion (Integer idSousVersion){versionDao.removeSousVersion(idSousVersion);}
     public void removeVersion (Integer idVersion){versionDao.removeVersion(idVersion);}

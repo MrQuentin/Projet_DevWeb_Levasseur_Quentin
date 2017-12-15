@@ -330,9 +330,11 @@ function deleteItem(idItem) {
 
 function warnRedirect() {
     alert("Your element have been added successfully !");
+    window.location = "form";
 };
 function warnRedirectDel(){
     alert("Your element have been deleted successfully !")
+    window.location = "form";
 }
 
 

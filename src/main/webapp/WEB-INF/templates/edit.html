@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Minecraft</title>
+        <link rel="stylesheet" type="text/css" href="css/ResponsiveStyle.css">
+        <link rel="stylesheet" type="text/css" href="css/form.css">
+        <link rel="stylesheet" type="text/css" href="css/login.css">
+        <script type="text/javascript" src="js/edit.js"></script>
+    </head>
+    <body>
+        <header th:replace="../fragments/htmlheader"></header>
+        <section>
+            <section id="contenu" class="col-10">
+                <h2 th:text="'Modification de la Sous-Version '+${sousVersion.id}" style="color: black; text-align: center; margin-bottom: 50px;"></h2>
+                <from>
+                    <div id="nom">
+                        <label for="nomVersion">Nom :</label>
+                        <input type="text" id="nomVersion" th:value="${sousVersion.title}">
+                    </div>
+                    <div id="description">
+                        <label for="descriptionVersion">Description :</label>
+                        <input type="text" id="descriptionVersion" th:value="${sousVersion.description}">
+                    </div>
+                    <a onclick="testValidation()"><p id="Submit">Valider</p></a>
+                </from>
+                <input type="text" id="sousversionID" th:value="${sousVersion.id}" style="display: none">
+            </section>
+        </section>
+    </body>
+</html>

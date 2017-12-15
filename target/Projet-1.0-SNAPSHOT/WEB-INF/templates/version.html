@@ -29,8 +29,9 @@
                                         <figure class="col-1 no-margin row-1"><img src="img/diamond_sword.png"></figure>
                                         <h2 class="col-10 no-margin row-1" th:text="${sousversion.title}">Version 1.12.2</h2>
                                     </section>
-                                    <section th:id="'v'+${sousversion.id}+'-son'" class="col-11 reduced-padding tab" style="display: none">
-                                        <p th:text="${sousversion.description}" class="col-8">java edition logo</p>
+                                    <section th:id="'v'+${sousversion.id}+'-son'" class="col-11 reduced-padding tab" style="display: none;height: 50px">
+                                        <a th:href="'edit?id='+${sousversion.id}"><figure class="col-2 no-padding no-margin"><img src="img/diamond_sword.png" style="height: 30px;margin-top: 10px"></figure></a>
+                                        <p th:text="${sousversion.description}" class="col-10">java edition logo</p>
                                     </section>
                                 </section>
                             </th:block>

@@ -55,6 +55,28 @@ public class VersionDaoImpl implements VersionDao {
     }
 
     @Override
+    public SousVersion getSousVersion(Integer idSousVersion) {
+        String querry="Select * From sousversion where sousversion_id=?";
+        try (Connection connection = DataSourceProvider.getInstance().getDataSource().getConnection()){
+            try(PreparedStatement statement = connection.prepareStatement(querry)){
+                statement.setInt(1, idSousVersion);
+                try (ResultSet resultSet = statement.executeQuery()){
+                    if (resultSet.next()){
+                        return new SousVersion(
+                             resultSet.getInt("sousversion_id"),
+                             resultSet.getString("name"),
+                             resultSet.getString("description")
+                        );
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public Version addVersion(Version version){
         String querry = "INSERT INTO version (name, illustration_name) VALUES (?,?);";
         try (Connection connection = DataSourceProvider.getInstance().getDataSource().getConnection()) {
@@ -83,6 +105,21 @@ public class VersionDaoImpl implements VersionDao {
             e.printStackTrace();
         }
         return sousVersion;
+    }
+
+    @Override
+    public void updateSousVersion (Integer sousVersionId, String newName, String newDescription){
+        String querry = "UPDATE sousversion set name=?, description=? where sousversion_id=?";
+        try (Connection connection = DataSourceProvider.getInstance().getDataSource().getConnection()){
+            try (PreparedStatement statement = connection.prepareStatement(querry)){
+                statement.setString(1, newName);
+                statement.setString(2, newDescription);
+                statement.setInt(3, sousVersionId);
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
